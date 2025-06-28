@@ -16,6 +16,8 @@ The original plan for data collection was to collect straight from the MLB websi
 ## Statistical Analysis
 *(starting at line 268 in 02-First-Five-Innings.R or line 324 in 03-Down-The-Tied.R, continued in 04-Results.Rmd)*
 
-Fit a logistic regression model to find which explanatory variables were statistically significant in whether a team won (completed the comeback) or lost. *(starting at line 268 in 02-First-Five-Innings.R or line 324 in 03-Down-The-Tied.R)* I then took the statistically significant variables, and created tables the showed the number of occurances and number of wins that the comeback team had, to compare the rates that the comeback was made for home/away teams. There were some interesting observed differences, so I did pairwise comparison tests to see how significant the differences were, and after adjusting the p-values, found that none of the pairs of proportions were statistically significant. *(code and analysis in 04-Results.Rmd)*
+Fit a logistic regression model to find which explanatory variables were statistically significant in whether a team won (completed the comeback) or lost. *(starting at line 268 in 02-First-Five-Innings.R or line 324 in 03-Down-The-Tied.R)* I then took the statistically significant variables, and created tables the showed the number of occurances and number of wins that the comeback team had, to compare the rates that the comeback was made for home/away teams. There were some interesting observed differences, so I did pairwise comparison tests to see how significant the differences were, and after adjusting the p-values, found that none of the pairs of proportions were statistically significant. 
+
+*(code and analysis in 04-Results.Rmd; rendered version can be found on [RPubs](https://rpubs.com/sd-karim/1326285))*
 
 
