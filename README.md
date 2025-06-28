@@ -6,7 +6,12 @@ This repository contains the process code and results of my summer research as a
 Project uses Google Sheets and R (dplyr, tidyr, lubridate and stringr packages specfically. Rselenium, rvest, wdman attempted but not used in final product)
 
 ## Data Collection, Wrangling
-The original plan for data collection was to collect straight from the MLB website, and just 
+The original plan for data collection was to collect straight from the MLB website via webscraping, and just filter out the games that didn't meet the criteria for a possible comeback (in this case we're looking for games where a team was down at least five runs at some point in the first five innings). I was unable to scrape the data in a way that would be useful for this project (for code attempts see 01-Webscraping-Attempt.R), and was recommended to download data from [stathead](https://stathead.com/baseball/team-batting-game-finder.cgi?request=1&order_by=date&timeframe=seasons&year_min=2020&year_max=2025&score_since=thru&score_period=5&score_margin_comp=lt&score_margin_val=-5)
+ instead. 
+
+ To get the data from stathead into R, I opened each download in Google Sheets as a way to easily compile all rows into one sheet per inning, and then imported each inning sheet into R. From there each dataframe got home/away indicator columns, reversal indicator columns, win proportion difference columns, and a gameID column. Once each inning was cleaned and formatted, I found all matches that were represented across multiple innings, and kept only the inning with the largest deficit for each game. (full code in 02-First-Five-Innings.R)
+
+ The second sample of data I needed to collect was for games in the last five seasons where a team was down at least three runs in innings 1-3, and then tied the game in innings 4-6. The steps for cleaning each set of three innings is the same as the First Five Innings data, but after removing duplicate recordings of the same game in each set of three, I inner joined the two sets of innings to keep only games where the team was both down three in the first set and tied in the second set. (full code in 03-Down-The-Tied.R)
 
 ## Statistical Analysis
 
