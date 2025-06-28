@@ -267,9 +267,9 @@ flt_fifthinging  <- filtered_innings[[5]]
 
 # logistic regression ------------------------------------------------------------------------
 
-full_innings <- bind_rows(allinnings) # 2517 rows, 45% home team is down | UPDATE: 5145 rows, 44.6% home team is down
+full_innings <- bind_rows(allinnings) # 5145 rows, 44.6% home team is down
 
-flt_innings <- bind_rows(filtered_innings) # 1167 rows, 45.5% home team is down | UPDATE: 2352 rows, 44.5% home team is down
+flt_innings <- bind_rows(filtered_innings) # 2352 rows, 44.5% home team is down
 
 # response variable: reversal
 # explanatory variables: DownTeam, Inning*, Diff, WinDiff
@@ -297,7 +297,7 @@ summary(model_full)
 
 summary(model_flt)
 
-summary(glm(Reversal ~ DownTeamBin, data = full_innings))
+summary(glm(Reversal ~ DownTeamBin, data = full_innings)) # confirming that any significance of this isn't being hidden by other, more significant variables
 summary(glm(Reversal ~ DownTeamBin, data = flt_innings))
 
 # remove games that ended in fewer than 9 innings
@@ -305,7 +305,7 @@ summary(glm(Reversal ~ DownTeamBin, data = flt_innings))
 flt_innings <- flt_innings |>
   filter(!(str_detect(Result, "7\\)$") | str_detect(Result, "8\\)$") | str_detect(Result, "6\\)$") | str_detect(Result, "5\\)$")))
 
-# make a windiff category
+# make a windiff category to look at proportions of specific scenarios
 
 flt_innings <- flt_innings |>
   mutate(WinDiffCat = case_when(
@@ -339,9 +339,5 @@ ADVHOME_innings <- flt_innings |>
 ADVAWAY_innings <- flt_innings |>
   filter(WinDiffCat == "Advantage" & DownTeam == "Away")
 
-
-home_down <- flt_innings |> filter(DownTeam == "Home")
+home_down <- flt_innings |> filter(DownTeam == "Home") 
 away_down <- flt_innings |> filter(DownTeam == "Away")
-
-home_down_OT <- home_down |> filter(str_detect(Result, "\\)$"))
-away_down_OT <- away_down |> filter(str_detect(Result, "\\)$"))
